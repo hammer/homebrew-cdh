@@ -1,6 +1,6 @@
 require 'formula'
 
-class CDHHadoop < Formula
+class CdhHadoop < Formula
   homepage 'http://www.cloudera.com'
   url 'http://archive.cloudera.com/cdh4/cdh/4/hadoop-2.0.0-cdh4.2.0.tar.gz'
   sha1 '8b88bd2a8f866ac3d10cfaf737758d25a8f8bf3c'
