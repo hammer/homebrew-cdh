@@ -26,7 +26,7 @@ brew install cdh-hadoop
 
 The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you don't need to do them manually. These changes suppress some annoying warning messages and configure your cluster to run in pseudo-distributed mode.
 * `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
-* `etc/hadoop/yarn-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
+* `etc/hadoop/yarn-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `YARN_OPTS`
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
 * `etc/hadoop/hdfs-site.xml`: Set `dfs.replication`
 * `etc/hadoop/log4j.properties`: Set `log4j.logger.org.apache.hadoop.util.NativeCodeLoader` log level to "ERROR"
