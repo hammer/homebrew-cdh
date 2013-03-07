@@ -54,5 +54,5 @@ hdfs dfs -ls
 ```bash
 export HADOOP_CONF_DIR=`brew --cellar`/cdh-hadoop/4.2.0/libexec/etc/hadoop
 `brew --cellar`/cdh-hadoop/4.2.0/libexec/sbin/start-yarn.sh
-hadoop jar /usr/local/Cellar/cdh-hadoop/4.2.0/libexec/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.0.0-cdh4.2.0.jar pi 10 100
+hadoop jar `brew --cellar`/cdh-hadoop/4.2.0/libexec/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.0.0-cdh4.2.0.jar pi 10 100
 ```
