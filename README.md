@@ -24,10 +24,8 @@ brew install cdh-hadoop
 
 #### Edit configuration files
 
-```bash
-echo 'export HADOOP_OPTS="$HADOOP_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk"' >> `brew --cellar`/cdh-hadoop/4.2.0/libexec/etc/hadoop/hadoop-env.sh
-```
-
+The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you don't need to do them manually:
+* `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
 * `etc/hadoop/hdfs-site.xml`: Set `dfs.replication`
 
