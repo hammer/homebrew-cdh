@@ -12,6 +12,8 @@ homebrew-cdh
 brew tap hammer/cdh
 ```
 
+I think you'll also need [Command Line Tools for Xcode](http://developer.apple.com/downloads).
+
 ### HDFS
 
 (Cf. http://ragrawal.wordpress.com/2012/04/28/installing-hadoop-on-mac-osx-lion/)
