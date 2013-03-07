@@ -28,6 +28,7 @@ The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you 
 * `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
 * `etc/hadoop/hdfs-site.xml`: Set `dfs.replication`
+* `etc/hadoop/log4j.properties`: Set `log4j.logger.org.apache.hadoop.util.NativeCodeLoader` log level to "ERROR"
 
 #### Enable SSH to localhost
 ```bash
@@ -35,6 +36,9 @@ systemsetup -f -setremotelogin on
 ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
+for host_id in localhost 0.0.0.0; do
+  ssh-keyscan $host_id >> ~/.ssh/known_hosts
+done
 ```
 
 #### Format, start, and test HDFS
