@@ -16,7 +16,7 @@ class CdhHadoop < Formula
   end
 
   def install
-    libexec.install %w[bin etc lib libexec share]
+    libexec.install %w[bin etc lib libexec sbin share]
     bin.mkpath
     Dir["#{libexec}/bin/*"].each do |b|
       n = Pathname.new(b).basename
