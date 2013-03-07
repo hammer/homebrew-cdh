@@ -24,7 +24,7 @@ brew install cdh-hadoop
 
 #### Edit configuration files
 
-The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you don't need to do them manually:
+The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you don't need to do them manually. These changes suppress some annoying warning messages and configure your cluster to run in pseudo-distributed mode.
 * `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
 * `etc/hadoop/yarn-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
