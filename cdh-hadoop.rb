@@ -22,6 +22,10 @@ class CdhHadoop < Formula
       n = Pathname.new(b).basename
       (bin+n).write shim_script(n)
     end
+
+    inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
+      "$",
+      'export HADOOP_OPTS="-Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk"'
   end
   
   def test
