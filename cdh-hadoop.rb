@@ -53,6 +53,12 @@ export HADOOP_OPTS=\"-Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kd
   </property>
 </configuration>
 "
+
+    inreplace "#{libexec}/etc/hadoop/log4j.properties",
+      "# Custom Logging levels",
+      "# Custom Logging levels
+log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR
+"
   end
   
   def test
