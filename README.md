@@ -10,5 +10,39 @@ homebrew-cdh
 
 ```bash
 brew tap hammer/cdh
+```
+
+### HDFS
+
+(Cf. http://ragrawal.wordpress.com/2012/04/28/installing-hadoop-on-mac-osx-lion/)
+
+#### Install CDH Hadoop
+
+```bash
 brew install cdh-hadoop
+```
+
+#### Edit configuration files
+
+```bash
+echo 'export HADOOP_OPTS="$HADOOP_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk"' >> `brew --cellar`/cdh-hadoop/4.2.0/libexec/etc/hadoop/hadoop-env.sh
+```
+
+* `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
+* `etc/hadoop/hdfs-site.xml`: Set `dfs.replication`
+
+#### Enable SSH to localhost
+```bash
+systemsetup -f -setremotelogin on
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+```
+
+#### Format, start, and test HDFS
+```bash
+hdfs namenode -format
+`brew --cellar`/cdh-hadoop/4.2.0/libexec/sbin/start-dfs.sh
+hdfs dfs -mkdir hey
+hdfs dfs -ls
 ```
