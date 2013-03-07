@@ -36,6 +36,9 @@ systemsetup -f -setremotelogin on
 ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
+for host_id in localhost 0.0.0.0; do
+  ssh-keyscan $host_id >> ~/.ssh/known_hosts
+done
 ```
 
 #### Format, start, and test HDFS
