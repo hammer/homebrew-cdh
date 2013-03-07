@@ -25,8 +25,34 @@ class CdhHadoop < Formula
 
     inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
-      "export HADOOP_IDENT_STRING=$USER
-       export HADOOP_OPTS=\"-Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk\""
+      "
+export HADOOP_IDENT_STRING=$USER
+export HADOOP_OPTS=\"-Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk\"
+"
+
+    inreplace "#{libexec}/etc/hadoop/core-site.xml",
+      "</configuration>",
+      "
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/Users/${user.name}/hadoop-store</value>
+  </property>
+  <property>
+    <name>fs.default.name</name>
+    <value>hdfs://localhost:8020</value>
+  </property>
+</configuration>
+"
+
+    inreplace "#{libexec}/etc/hadoop/hdfs-site.xml",
+      "</configuration>",
+      "
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+</configuration>
+"
   end
   
   def test
