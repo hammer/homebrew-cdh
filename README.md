@@ -34,7 +34,7 @@ The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you 
 #### Enable SSH to localhost
 ```bash
 systemsetup -f -setremotelogin on
-ssh-keygen -t rsa
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 for host_id in localhost 0.0.0.0; do
