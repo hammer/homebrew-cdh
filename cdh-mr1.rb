@@ -16,11 +16,16 @@ class CdhMr1 < Formula
   end
 
   def install
-    libexec.install %w[bin etc lib libexec sbin share]
+    libexec.install %w[bin conf lib webapps contrib]
     bin.mkpath
     Dir["#{libexec}/bin/*"].each do |b|
       n = Pathname.new(b).basename
       (bin+n).write shim_script(n)
+    end
+
+    inreplace "#{libexec}/conf/hadoop-env.sh",
+      "# export JAVA_HOME=/usr/lib/j2sdk1.5-sun",
+      "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
     end
 
     inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
