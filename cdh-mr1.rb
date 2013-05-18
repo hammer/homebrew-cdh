@@ -27,21 +27,14 @@ class CdhMr1 < Formula
       "# export JAVA_HOME=/usr/lib/j2sdk1.5-sun",
       "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
 
-    inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
+    inreplace "#{libexec}/conf/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
       "
 export HADOOP_IDENT_STRING=$USER
 export HADOOP_OPTS=\"$HADOOP_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk\"
 "
 
-    inreplace "#{libexec}/etc/hadoop/yarn-env.sh",
-      "YARN_OPTS=\"$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE\"",
-      "
-YARN_OPTS=\"$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE\"
-YARN_OPTS=\"$YARN_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.kdc=kdc0.ox.ac.uk:kdc1.ox.ac.uk\"
-"
-
-    inreplace "#{libexec}/etc/hadoop/core-site.xml",
+    inreplace "#{libexec}/conf/core-site.xml",
       "</configuration>",
       "
   <property>
@@ -55,7 +48,7 @@ YARN_OPTS=\"$YARN_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.
 </configuration>
 "
 
-    inreplace "#{libexec}/etc/hadoop/log4j.properties",
+    inreplace "#{libexec}/conf/log4j.properties",
       "# Custom Logging levels",
       "# Custom Logging levels
 log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR
