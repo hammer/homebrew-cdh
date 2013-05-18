@@ -26,7 +26,6 @@ class CdhMr1 < Formula
     inreplace "#{libexec}/conf/hadoop-env.sh",
       "# export JAVA_HOME=/usr/lib/j2sdk1.5-sun",
       "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
-    end
 
     inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
