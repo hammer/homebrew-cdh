@@ -6,22 +6,13 @@ class CdhMr1 < Formula
   sha1 '0996957fe771e044fd01e378988ced4d5a7e4f00'
   version '4.2.1'
 
-  depends_on 'protobuf'
-  
-  def shim_script target
-    <<-EOS.undent
-    #!/bin/bash
-    exec "#{libexec}/bin/#{target}" "$@"
-    EOS
-  end
-
   def install
+    rm_f Dir["bin/*.bat"]
     libexec.install %w[bin conf lib webapps contrib]
-    bin.mkpath
-    Dir["#{libexec}/bin/*"].each do |b|
-      n = Pathname.new(b).basename
-      (bin+n).write shim_script(n)
-    end
+    libexec.install Dir['*.jar']
+    bin.write_exec_script Dir["#{libexec}/bin/*"]
+    # But don't make rcc visible, it conflicts with Qt
+    (bin/'rcc').unlink
 
     inreplace "#{libexec}/conf/hadoop-env.sh",
       "# export JAVA_HOME=/usr/lib/j2sdk1.5-sun",
