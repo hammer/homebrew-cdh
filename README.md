@@ -81,8 +81,6 @@ jps
 `brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -cat output/part-00000 | head
 ```
 
-...
-
 When you're done:
 
 #### Stop MapReduce and HDFS, remove temporary data
