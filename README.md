@@ -19,6 +19,8 @@ I think you'll also need [Command Line Tools for Xcode](http://developer.apple.c
 
 #### Install CDH Hadoop
 
+(Don't worry about the error linking cdh-mr1)
+
 ```bash
 brew install cdh-hadoop
 brew install cdh-mr1
@@ -56,14 +58,6 @@ done
 jps
 ```
 
-#### Add some directories on HDFS
-```bash
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir /tmp
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chmod -R 1777 /tmp
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir -p /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chmod 1777 /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
-```
-
 #### Set HADOOP_HOME, Start MapReduce, ensure all processes are running
 ```brew
 export HADOOP_HOME=`brew --cellar`/cdh-mr1/4.2.1/libexec
@@ -71,10 +65,8 @@ export HADOOP_HOME=`brew --cellar`/cdh-mr1/4.2.1/libexec
 jps
 ```
 
-#### Add more directories, and data, on HDFS
+#### Add some data to HDFS
 ```brew
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir /user/hammer
-`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chown hammer /user/hammer
 `brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir input
 `brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -put `brew --cellar`/cdh-mr1/4.2.1/libexec/conf/*.xml input
 ```
