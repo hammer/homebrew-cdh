@@ -3,7 +3,7 @@ require 'formula'
 class CdhHadoop < Formula
   homepage 'http://www.cloudera.com'
   url 'http://archive.cloudera.com/cdh4/cdh/4/hadoop-2.0.0-cdh4.2.1.tar.gz'
-  sha1 '8b88bd2a8f866ac3d10cfaf737758d25a8f8bf3c'
+  sha1 'a9ab0418df262611a98686e7d88e92e220b6c833'
   version '4.2.1'
 
   depends_on 'protobuf'
