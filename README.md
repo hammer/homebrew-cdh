@@ -97,4 +97,5 @@ When you're done:
 `brew --cellar`/cdh-mr1/4.2.1/bin/stop-mapred.sh
 `brew --cellar`/cdh-hadoop/4.2.1/libexec/sbin/stop-dfs.sh
 rm -rf ~/hadoop-store
+unset HADOOP_HOME
 ```
