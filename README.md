@@ -87,3 +87,14 @@ jps
 ```brew
 `brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -cat output/part-00000 | head
 ```
+
+...
+
+When you're done:
+
+#### Stop MapReduce and HDFS, remove temporary data
+```bash
+`brew --cellar`/cdh-mr1/4.2.1/bin/stop-mapred.sh
+`brew --cellar`/cdh-hadoop/4.2.1/libexec/sbin/stop-dfs.sh
+rm -rf ~/hadoop-store
+```
