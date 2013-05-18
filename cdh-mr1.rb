@@ -15,10 +15,6 @@ class CdhMr1 < Formula
     (bin/'rcc').unlink
 
     inreplace "#{libexec}/conf/hadoop-env.sh",
-      "# export JAVA_HOME=/usr/lib/j2sdk1.5-sun",
-      "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
-
-    inreplace "#{libexec}/conf/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
       "
 export HADOOP_IDENT_STRING=$USER
@@ -35,6 +31,16 @@ export HADOOP_OPTS=\"$HADOOP_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.sec
   <property>
     <name>fs.default.name</name>
     <value>hdfs://localhost:8020</value>
+  </property>
+</configuration>
+"
+
+    inreplace "#{libexec}/conf/mapred-site.xml",
+      "</configuration>",
+      "
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>hdfs://localhost:9001</value>
   </property>
 </configuration>
 "

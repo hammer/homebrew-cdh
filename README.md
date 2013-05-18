@@ -14,21 +14,27 @@ brew tap hammer/cdh
 
 I think you'll also need [Command Line Tools for Xcode](http://developer.apple.com/downloads).
 
-### HDFS
+### CDH 4: HDFS 2 with MapReduce 1
 
 #### Install CDH Hadoop
 
 ```bash
 brew install cdh-hadoop
+brew install cdh-mr1
 ```
 
-#### Edit configuration files
+#### No need to edit configuration files
 
 The `cdh-hadoop` formula uses `inreplace` to make the following changes, so you don't need to do them manually. These changes suppress some annoying warning messages and configure your cluster to run in pseudo-distributed mode.
 * `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
-* `etc/hadoop/yarn-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `YARN_OPTS`
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
 * `etc/hadoop/hdfs-site.xml`: Set `dfs.replication`
+* `etc/hadoop/log4j.properties`: Set `log4j.logger.org.apache.hadoop.util.NativeCodeLoader` log level to "ERROR"
+
+The `cdh-mr1` formula uses `inreplace` to make the following changes, so you don't need to do them manually. These changes suppress some annoying warning messages and configure your cluster to run in pseudo-distributed mode.
+* `etc/hadoop/hadoop-env.sh`: Append `java.security.krb5.realm` and `java.security.krb5.kdc` to `HADOOP_OPTS`
+* `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
+* `etc/hadoop/mapred-site.xml`: Set `mapred.job.tracker`
 * `etc/hadoop/log4j.properties`: Set `log4j.logger.org.apache.hadoop.util.NativeCodeLoader` log level to "ERROR"
 
 #### Enable SSH to localhost
@@ -42,17 +48,42 @@ for host_id in localhost 0.0.0.0; do
 done
 ```
 
-#### Format, start, and test HDFS
+#### Format and start HDFS, ensure all processes are running
 ```bash
-hdfs namenode -format
-`brew --cellar`/cdh-hadoop/4.2.0/libexec/sbin/start-dfs.sh
-hdfs dfs -mkdir hey
-hdfs dfs -ls
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hdfs namenode -format
+`brew --cellar`/cdh-hadoop/4.2.1/libexec/sbin/start-dfs.sh
+jps
 ```
 
-### YARN
+#### Add some directories on HDFS
 ```bash
-export HADOOP_CONF_DIR=`brew --cellar`/cdh-hadoop/4.2.0/libexec/etc/hadoop
-`brew --cellar`/cdh-hadoop/4.2.0/libexec/sbin/start-yarn.sh
-hadoop jar `brew --cellar`/cdh-hadoop/4.2.0/libexec/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.0.0-cdh4.2.0.jar pi 10 100
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir /tmp
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chmod -R 1777 /tmp
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir -p /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chmod 1777 /var/lib/hadoop-hdfs/cache/mapred/mapred/staging
+```
+
+#### Set HADOOP_HOME, Start MapReduce, ensure all processes are running
+```brew
+export HADOOP_HOME=`brew --cellar`/cdh-mr1/4.2.1/libexec
+`brew --cellar`/cdh-mr1/4.2.1/bin/start-mapred.sh
+jps
+```
+
+#### Add more directories, and data, on HDFS
+```brew
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir /user/hammer
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -chown hammer /user/hammer
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -mkdir input
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -put `brew --cellar`/cdh-mr1/4.2.1/libexec/conf/*.xml input
+```
+
+#### Run a MapReduce job
+```brew
+`brew --cellar`/cdh-mr1/4.2.1/bin/hadoop jar `brew --cellar`/cdh-mr1/4.2.1/libexec/hadoop-examples-2.0.0-mr1-cdh4.2.1.jar grep input output 'dfs[a-z.]+'
+```
+
+#### Read results of MapReduce job
+```brew
+`brew --cellar`/cdh-hadoop/4.2.1/bin/hadoop fs -cat output/part-00000 | head
 ```
