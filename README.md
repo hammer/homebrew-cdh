@@ -5,6 +5,7 @@ homebrew-cdh
 
 ## Formulae
 * cdh-hadoop
+* cdh-mr1
 
 ## Usage
 
