@@ -1,9 +1,9 @@
 require 'formula'
 
-class CdhHadoop < Formula
+class CdhMr1 < Formula
   homepage 'http://www.cloudera.com'
-  url 'http://archive.cloudera.com/cdh4/cdh/4/hadoop-2.0.0-cdh4.2.1.tar.gz'
-  sha1 '8b88bd2a8f866ac3d10cfaf737758d25a8f8bf3c'
+  url 'http://archive.cloudera.com/cdh4/cdh/4/mr1-2.0.0-mr1-cdh4.2.1.tar.gz'
+  sha1 '0996957fe771e044fd01e378988ced4d5a7e4f00'
   version '4.2.1'
 
   depends_on 'protobuf'
@@ -47,16 +47,6 @@ YARN_OPTS=\"$YARN_OPTS -Djava.security.krb5.realm=OX.AC.UK -Djava.security.krb5.
   <property>
     <name>fs.default.name</name>
     <value>hdfs://localhost:8020</value>
-  </property>
-</configuration>
-"
-
-    inreplace "#{libexec}/etc/hadoop/hdfs-site.xml",
-      "</configuration>",
-      "
-  <property>
-    <name>dfs.replication</name>
-    <value>1</value>
   </property>
 </configuration>
 "
