@@ -60,7 +60,7 @@ jps
 
 #### Set HADOOP_HOME, Start MapReduce, ensure all processes are running
 ```brew
-export HADOOP_HOME=`brew --cellar`/cdh-mr1/4.2.1/libexec
+export HADOOP_MAPRED_HOME=`brew --cellar`/cdh-mr1/4.2.1/libexec
 `brew --cellar`/cdh-mr1/4.2.1/bin/start-mapred.sh
 jps
 ```
