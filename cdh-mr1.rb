@@ -15,6 +15,16 @@ class CdhMr1 < Formula
     (bin/'rcc').unlink
 
     inreplace "#{libexec}/conf/hadoop-env.sh",
+     "# export JAVA_HOME=/usr/lib/j2sdk1.6-sun",
+     "
+if [ \"$JAVA_HOME\" != \"\" ]; then
+  JAVA_HOME=$JAVA_HOME
+else
+  JAVA_HOME=$(/usr/libexec/java_home)
+fi
+     "
+
+    inreplace "#{libexec}/conf/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
       "
 export HADOOP_IDENT_STRING=$USER
