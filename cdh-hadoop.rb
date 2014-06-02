@@ -2,9 +2,9 @@ require 'formula'
 
 class CdhHadoop < Formula
   homepage 'http://www.cloudera.com'
-  url 'http://archive.cloudera.com/cdh4/cdh/4/hadoop-2.0.0-cdh4.2.1.tar.gz'
-  sha1 'a9ab0418df262611a98686e7d88e92e220b6c833'
-  version '4.2.1'
+  url 'http://archive.cloudera.com/cdh4/cdh/4/hadoop-2.0.0-cdh4.6.0.tar.gz'
+  sha1 'f7d3c5a898d0651a1721785f39bcfbe069d1992e'
+  version '4.6.0'
 
   depends_on 'protobuf'
   

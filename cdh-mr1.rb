@@ -2,17 +2,18 @@ require 'formula'
 
 class CdhMr1 < Formula
   homepage 'http://www.cloudera.com'
-  url 'http://archive.cloudera.com/cdh4/cdh/4/mr1-2.0.0-mr1-cdh4.2.1.tar.gz'
-  sha1 '0996957fe771e044fd01e378988ced4d5a7e4f00'
-  version '4.2.1'
+  url 'http://archive.cloudera.com/cdh4/cdh/4/mr1-2.0.0-mr1-cdh4.2.2.tar.gz'
+  sha1 '77c2677884aca771825f6fa68f3a4ea1794f7ea0'  
+  version '4.2.2'
+
+  depends_on 'cdh-hadoop'
 
   def install
     rm_f Dir["bin/*.bat"]
     libexec.install %w[bin conf lib webapps contrib]
     libexec.install Dir['*.jar']
-    bin.write_exec_script Dir["#{libexec}/bin/*"]
-    # But don't make rcc visible, it conflicts with Qt
-    (bin/'rcc').unlink
+    bin.write_exec_script Dir["#{libexec}/bin/hadoop-*"]
+    bin.write_exec_script Dir["#{libexec}/bin/*-mapred*"]
 
     inreplace "#{libexec}/conf/hadoop-env.sh",
       "export HADOOP_IDENT_STRING=$USER",
