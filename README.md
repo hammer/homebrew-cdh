@@ -19,10 +19,7 @@ I think you'll also need [Command Line Tools for Xcode](http://developer.apple.c
 
 #### Install CDH Hadoop
 
-(Don't worry about the error linking cdh-mr1)
-
 ```bash
-brew install cdh-hadoop
 brew install cdh-mr1
 ```
 
@@ -39,6 +36,7 @@ The `cdh-mr1` formula uses `inreplace` to make the following changes, so you don
 * `etc/hadoop/core-site.xml`: Set `hadoop.tmp.dir` and `fs.default.name`
 * `etc/hadoop/mapred-site.xml`: Set `mapred.job.tracker`
 * `etc/hadoop/log4j.properties`: Set `log4j.logger.org.apache.hadoop.util.NativeCodeLoader` log level to "ERROR"
+
 
 #### Enable SSH to localhost
 ```bash
